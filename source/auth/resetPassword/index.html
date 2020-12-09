@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>Hifa Kredi Şifre Değiştirme</title>
+    <link rel="stylesheet" type="text/css" href="../resetPassword/index.css">
+    <script type="text/javascript" src="../resetPassword/index.js"></script>
+    
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header"></div>
+        <div class="content">
+            <div class="itemsContainer">
+                <h1 class="itemTitle">Şifreni Yenile</h1>
+                <div class="form">
+                    <input type="text" id="newPasword" name="newPasword" type="password" placeholder="Yeni Şifre"
+                        class="input" onchange="controller()">
+                    <input type="text" id="newPasswordAgain" name="newPasswordAgain" type="password"
+                        placeholder="Şifre Tekrar" class="input" onchange="controller()">
+                    <button class="addButton" id="addButton" onclick="resetPassword()">Kayıt Et</button>
+                </div>
+                <h1 id="errorText" class="errorText"></h1>
+            </div>
+        </div>
+        <div class="bottom">
+            <p class="bottomTitle">
+                HifaSoft | Kira Takip Uygulaması
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

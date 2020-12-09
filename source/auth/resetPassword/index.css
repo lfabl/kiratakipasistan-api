@@ -1,0 +1,96 @@
+.container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10vh;
+}
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80vh;
+}
+.itemsContainer{
+    padding: 10px;
+    width: 360px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+}
+.itemTitle{
+    color: #323232;
+    font-weight: normal;
+    margin-bottom: 6%;
+    text-align: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input{ 
+    width: 100%;
+    background-color: #fcfcfc;
+    border: 0;
+    border-bottom: 1px solid #323232;
+    color: #323232;
+    padding: 10px;
+    font-weight: 600;
+    margin-bottom: 6%;
+}
+input:focus{
+    outline: 0;
+}
+.addButton{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 3%;
+    background-color:#1A2430;
+    border-radius:  10px;
+    color: white;
+    font-size: 18px;
+    border: none;
+}
+.errorText{
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    color: #CD0A0A;
+}
+.bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10vh;
+}
+.bottomTitle{
+    width: 100%;
+    font-size: 24px;
+    font-weight: lighter;
+    text-align: center;
+    color: #525252;
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-family: "Exo 2";
+}
+
+@media only screen and (max-width: 500px) {
+    .itemsContainer{
+        width: 900px !important;
+    }
+  }

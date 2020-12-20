@@ -19,7 +19,7 @@ const jwtVerify = async (request) => {
                     })
                 else {
                     r.db("hifaKiraTakip").table("users").filter({ id: decoded.data.userID, token: token }).then((res) => {
-                        if (res !== [] && typeof res !== "undefined") {
+                        if (res.length !== 0 && typeof res !== "undefined") {
                             resolve({
                                 message: "Bir sorun yok",
                                 code: 200,

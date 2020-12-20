@@ -13,7 +13,7 @@ const SafeAllRealEstates = `
         ownerManagerPhoneNumber: String,
         ownerNameSurname: String,
         activeTenant: [ActiveTenant],
-        detailRent: Int
+        detailRent: String
     }
 
     type ActiveTenant {

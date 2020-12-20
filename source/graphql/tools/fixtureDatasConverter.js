@@ -7,10 +7,9 @@ export const fixtureDatasConverter = async (datas, id) => {
         const returnData = [];
         for (let index = 0; index < datas.length; index++) {
             const element = datas[index];
-            console.log(element)
             const imageResult = [];
             if (typeof element.images !== "undefined" && element.images.length !== 0) {
-                if (element.images.length > 5) {
+                if (element.images.length > 8) {
                     resolve({
                         message: "Demirbaş resimi için maksimum sınıra ulaştığınızdan dolayı ekleme yapılamamaktadır",
                         status: false
@@ -133,7 +132,6 @@ const deleteImages = async (deleteFilest) => {
     return await new Promise(async (resolve, reject) => {
         for (let index = 0; index < deleteFilest.length; index++) {
             const element = deleteFilest[index];
-            console.log(element)
             const datas = deleteImage(element)
             if (deleteFilest.length - 1 === index) {
                 resolve(true)

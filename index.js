@@ -36,7 +36,7 @@ app.use('/app', async (request, response, next) => {
 		})
 	})
 },
-	graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 50 }),
+	graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 64 }),
 	GraphHTTP((request, response, graphQLParams) => ({
 		schema: appSchema,
 		context: request.data,

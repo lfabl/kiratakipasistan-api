@@ -4,6 +4,7 @@ import { storeUploadImage } from "../../tools/storeUploadImage";
 import { storeDeleteImage } from "../../tools/storeDeleteImage";
 
 const updateProfileImage = async (obj, args, context) => {
+    console.log("girdi")
     const userID = context.userID;
     const user = await r.db("hifaKiraTakip").table("users").get(userID).run();
     if (user) {

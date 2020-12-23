@@ -1,6 +1,7 @@
 import { r } from '../../../db';
 import validate from "type-valid";
-
+import { storeUploadImage } from "../../tools/storeUploadImage";
+import { storeDeleteImage } from "../../tools/storeDeleteImage";
 const validationControl = (args, validationTypes) => {
     let newArgs = [];
     const names = Object.keys(validationTypes);
@@ -145,6 +146,28 @@ const newTenant = async (obj, args, context) => {
     updateTenantDatas.fullName = args.fullName;
     updateTenantDatas.tcIdentity = args.tcIdentity;
     updateTenantDatas.phoneNumber1 = args.phoneNumber1;
+
+    if (typeof args.profileImage !== "undefined") {
+        const uploadResult = await storeUploadImage(args.profileImage.promise);
+        if (uploadResult.status === true) {
+            if (updateTenantDatas.profileImageName !== "") {
+                await storeDeleteImage(updateTenantDatas.profileImageName);
+            }
+            updateTenantDatas.profileImageName = uploadResult.fileName;
+        }
+        else {
+            console.log("buraya girdi")
+            return {
+                message: "Güncelleme işlemi yapılamamıştır. Lütfen daha sonra tekrar deneyin",
+                code: 400
+            }
+        }
+    }
+    else if (typeof args.deleteProfileImage !== "undefined" && args.deleteProfileImage === true) {
+        await storeDeleteImage(updateTenantDatas.profileImageName);
+        updateTenantDatas.profileImageName = "";
+    }
+    
     const id = args.tenantID;
     return await updateExistTenant({ updateTenantDatas, id })
 }

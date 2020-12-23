@@ -3,6 +3,8 @@ const mutation = `
         updateProfile(
             oldPassword: String,
             newPassword: String,
+            profileImage: Upload,
+            deleteProfileImage: Boolean
         ): Response
         
         updateProfileImage(
@@ -36,6 +38,8 @@ const mutation = `
             suretyTcIdentity: String,
             suretyPhoneNumber: String,
             suretyAdress: String,
+            profileImage: Upload,
+            deleteProfileImage: Boolean,
         ): Response
 
         updateTenantImage(

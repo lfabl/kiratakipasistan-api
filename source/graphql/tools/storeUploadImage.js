@@ -5,6 +5,7 @@ export const storeUploadImage = (args) => {
     return new Promise(async function (resolve, reject) {
         const { createReadStream, filename } = await args;
         const newFileName = await uploadFileNameCreator(filename);
+        console.log(newFileName)
         if (newFileName.status === true) {
             const coolPath = join(__dirname + "../../../uploadedProfileImages/".concat(newFileName.fileName));
             return createReadStream().pipe(createWriteStream(coolPath)).on("finish", () => {

@@ -15,6 +15,8 @@ const validationControl = (args, validationTypes) => {
 
 const updateRealEstate = async (obj, args, context) => {
     let updateRealEstateDatas = {};
+    console.log(args.fixtureDatas[0].images)
+
     let validationTypes = {
         type: {
             isEmptyString: true,
@@ -54,7 +56,6 @@ const updateRealEstate = async (obj, args, context) => {
     }
 
     if (args.fixtureDatas) {
-        console.log(args.fixtureDatas)
         if (args.fixtureDatas.length !== 0) {
             if (args.fixtureDatas.length > 8) {
                 return {

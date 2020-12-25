@@ -18,7 +18,6 @@ const updateTenantImage = async (obj, args, context) => {
                 newTenantData.profileImageName = uploadResult.fileName;
             }
             else {
-                console.log("buraya girdi")
                 return {
                     message: "Güncelleme işlemi yapılamamıştır. Lütfen daha sonra tekrar deneyin",
                     code: 400

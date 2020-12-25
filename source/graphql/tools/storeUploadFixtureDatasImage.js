@@ -4,6 +4,7 @@ import { join } from "path";
 
 export const storeUploadFixtureDatasImage = async (args) => {
     return await new Promise(async function (resolve, reject) {
+        
         const { createReadStream, filename } = await args;
         const newFileName = await uploadFileNameCreator(filename);
         if (newFileName.status === true) {

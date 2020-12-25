@@ -15,7 +15,6 @@ const validationControl = (args, validationTypes) => {
     return result;
 }
 const forgetPassword = async (args) => {
-    console.log(args)
     let validationTypes = {
         mail: {
             isEmptyString: true,
@@ -57,6 +56,7 @@ const sendEmail = async ({ args }) => {
         const subject = "HifaSoft Şifre Sıfırlama";
         const text = "Merhabalar, şifre sıfırlama isteğiniz sistemimiz tarafından algılanmıştır" + " http://5.2.82.43:4010/auth/resetPassword?id=" + uuid;
 
+        console.log(uuid);
         const result = await emailSender({ mail, subject, text })
         if (result.code === 200) {
             await r.db("hifaKiraTakip").table("users").filter({ mail: mail }).update({ resetPasswordID: uuid }).then((res) => {
@@ -82,13 +82,13 @@ const emailSender = ({ mail, subject, text }) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'caglayagci371@gmail.com',
-                pass: '123456789cagla'
+                user: 'hifasoft@gmail.com',
+                pass: process.env.MAIL_PASS
             }
         });
 
         const mailOptions = {
-            from: 'caglayagci371@gmail.com',
+            from: 'hifasoft@gmail.com',
             to: mail,
             subject: subject,
             text: text

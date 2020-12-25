@@ -85,7 +85,6 @@ const updateProfile = async (obj, args, context) => {
                 updateVariables.profileImageName = uploadResult.fileName;
             }
             else {
-                console.log("buraya girdi")
                 return {
                     message: "Güncelleme işlemi yapılamamıştır. Lütfen daha sonra tekrar deneyin",
                     code: 400

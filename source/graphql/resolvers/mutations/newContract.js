@@ -48,7 +48,6 @@ const newContract = async (obj, args, context) => {
             code: 400
         };
     }
-    console.log(args.paymentPeriod)
     const contractPeriodValidResult = await validCustomProps(args.contractPeriod, "contractTypeValid");
     const paymentTypeValidResult = await validCustomProps(args.paymentType, "paymentTypeValid");
     const paymentPeriodValidResult = await validCustomProps(args.paymentPeriod.type, "paymentPeriodValid");

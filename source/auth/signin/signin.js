@@ -16,7 +16,6 @@ const validationControl = (args, validationTypes) => {
 }
 
 const signin = async (args) => {
-    console.log(args)
     let filterParams = {};
     let validationTypes = {
         password: {
@@ -63,7 +62,6 @@ const signin = async (args) => {
                 if (args.configs.expireDate) tokenConfigs.exp = args.configs.expireDate;
             }
             const token = jwt.sign(tokenConfigs, TOKEN_SECRET_KEY);
-            console.log("token",token)
             return await r.db("hifaKiraTakip").table("users").get(userData.id).update({
                 token: token
             }).then(() => {

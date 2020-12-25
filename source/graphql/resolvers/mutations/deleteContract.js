@@ -3,7 +3,6 @@ import { r } from "../../../db";
 const deleteContract = async (obj, args, context) => {
     try {
         const userID = context.userID;
-        console.log(userID)
         return await r.db("hifaKiraTakip").table("contracts").filter(function (contract) {
             return contract("status").eq("continuation").and(
                 contract("userID").eq(userID)
@@ -15,7 +14,6 @@ const deleteContract = async (obj, args, context) => {
         }).update({
             status: "cancel"
         }).then((updateResult) => {
-            console.log(updateResult)
             if (updateResult.replaced && updateResult.replaced !== 0 || updateResult.unchanged && updateResult.unchanged !== 0) {
                 return {
                     message: "Başarı ile bilgiler güncellenmiştir.",

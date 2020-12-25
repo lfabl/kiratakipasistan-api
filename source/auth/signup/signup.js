@@ -87,7 +87,6 @@ const addUser = async ({ args }) => {
     };
     return await r.db("hifaKiraTakip").table("users").insert(newUserData, { returnChanges: true }).then(async (userData) => {
         const createdData = userData.changes[0].new_val;
-        console.log(createdData);
         let tokenConfigs = {
             data: {
                 userID: createdData.id

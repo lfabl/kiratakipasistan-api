@@ -14,7 +14,6 @@ const validationControl = (args, validationTypes) => {
 }
 
 const newTenant = async (obj, args, context) => {
-    console.log(args)
     let newTenantDatas = {};
     let validationTypes = {
         fullName: {

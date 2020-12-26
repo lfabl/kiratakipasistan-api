@@ -1,3 +1,6 @@
+import {
+        API_URL
+} from '../../config';
 
 function resetPassword() {
         let newPasword = document.getElementById("newPasword").value;
@@ -15,7 +18,7 @@ function resetPassword() {
                 });
                 if (vars.id && vars.id !== "") {
                         document.getElementById("errorText").style.color = "#CD0A0A"
-*                        axios.post("http://5.2.82.43:4010/auth/resetPasswordControl", {
+*                        axios.post("http://"+ API_URL +":4010/auth/resetPasswordControl", {
                                 id: vars.id,
                                 password: MD5(newPasword)
                         }).then((res) => {

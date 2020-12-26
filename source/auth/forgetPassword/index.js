@@ -1,7 +1,9 @@
 import { r } from '../../db';
 import validate from 'type-valid';
 import nodemailer from "nodemailer";
-import { restart } from 'nodemon';
+import {
+    API_URL
+} from '../../config.js';
 
 const validationControl = (args, validationTypes) => {
     let newArgs = [];
@@ -54,7 +56,7 @@ const sendEmail = async ({ args }) => {
         const uuid = await r.uuid();
         const mail = args.mail;
         const subject = "HifaSoft Şifre Sıfırlama";
-        const text = "Merhabalar, şifre sıfırlama isteğiniz sistemimiz tarafından algılanmıştır" + " http://5.2.82.43:4010/auth/resetPassword?id=" + uuid;
+        const text = "Merhabalar, şifre sıfırlama isteğiniz sistemimiz tarafından algılanmıştır" + " http://" + API_URL + ":4010/auth/resetPassword?id=" + uuid;
 
         console.log(uuid);
         const result = await emailSender({ mail, subject, text })
@@ -83,7 +85,7 @@ const emailSender = ({ mail, subject, text }) => {
             service: 'gmail',
             auth: {
                 user: 'hifasoft@gmail.com',
-                pass: process.env.MAIL_PASS
+                pass: "Maho2495382"
             }
         });
 

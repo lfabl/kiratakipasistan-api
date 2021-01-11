@@ -1,18 +1,9 @@
 import { r } from '../../../db';
 import { readFileSync } from "fs";
 import { join } from "path";
-import sendNotification from '../../../notificationManager/sendNotification';
 
 const getRealEstate = async (obj, args, context) => {
     try {
-        sendNotification({
-            action: "test",
-            message: "Merhaba deneme mesajı tamamdır.",
-            objectID: args.realEstateID,
-            title: "Bu da başlıktır.",
-            userID: context.userID,
-            users: ["585d7840-49cb-4036-b36d-8bc537adfebf"]
-        });
         const realEstateID = args.realEstateID;
         return await r.db("hifaKiraTakip").table("realEstates").filter({
             id: realEstateID,

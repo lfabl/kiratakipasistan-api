@@ -4,10 +4,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { graphqlUploadExpress } from 'graphql-upload';
 import appSchema from './source/graphql/schema';
-import { json } from 'express';
+import './source/cron/index';
 
 //Constants
-import { TOKEN_SECRET_KEY } from './source/constants';
 import jwtVerify from "./source/constants/jwtVerify";
 
 //Auth Folder
@@ -53,7 +52,6 @@ app.use('/auth/signup', async (req, res, next) => {
 	})
 });
 
-
 app.use('/auth/signin', async (req, res, next) => {
 	const createNewUser = await signin(req.body);
 	res.send({
@@ -72,7 +70,6 @@ app.use('/auth/forgetPassword', async (req, res, next) => {
 });
 
 app.use('/auth/resetPassword', express.static(__dirname + '/source/auth/resetPassword'));
-
 app.use('/auth/resetPasswordControl', async (req, res, next) => {
 	const forgetPasswordResult = await resetPasswordControl(req.body);
 	res.send({
@@ -80,7 +77,6 @@ app.use('/auth/resetPasswordControl', async (req, res, next) => {
 		code: forgetPasswordResult.code
 	})
 });
-
 
 app.use('/auth/userTokenControl', async (req, res, next) => {
 	const createNewUser = await userTokenControl(req.body);

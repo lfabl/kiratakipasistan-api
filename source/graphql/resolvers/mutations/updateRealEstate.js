@@ -15,7 +15,6 @@ const validationControl = (args, validationTypes) => {
 
 const updateRealEstate = async (obj, args, context) => {
     let updateRealEstateDatas = {};
-    console.log(args.fixtureDatas[0].images)
 
     let validationTypes = {
         type: {

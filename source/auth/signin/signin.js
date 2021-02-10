@@ -1,55 +1,37 @@
 import { r } from '../../db';
 import { TOKEN_SECRET_KEY } from '../../constants';
 import jwt from 'jsonwebtoken';
-import validate from 'type-valid';
+import validator from "validator";
 
-const validationControl = (args, validationTypes) => {
-    let newArgs = [];
-    const names = Object.keys(validationTypes);
-    names.forEach(name => newArgs.push({
-        name,
-        param: args[name],
-        type: validationTypes[name]
-    }));
-    const result = validate({ args: newArgs });
-    return result;
-}
+const USER_NAMEREGEX = /^(?=.{8,20}$)(?![.])(?!.*[.]{2})[a-zA-Z0-9.]+(?<![_.])$/;
 
 const signin = async (args) => {
-    let filterParams = {};
-    let validationTypes = {
-        password: {
-            isEmptyString: true,
-            isMD5: true
-        }
-    };
-    if (args.userName) {
-        filterParams = {
-            userName: args.userName
-        };
-        validationTypes["userName"] = {
-            isEmptyString: true,
-            isLength: {
-                min: 3,
-                max: 35
-            }
-        };
-    } else {
-        return {
-            code: 400,
-            message: "Lütfen kullanıcı adı ile girişi sağlayınız."
-        };
-    }
+    const { userNameOrMail, password } = args;
+    const filteredData = {};
 
-    const validationControlResult = validationControl(args, validationTypes);
-    if (!validationControlResult.result) {
-        return {
-            message: validationControlResult.error,
+    /* Validation && UserName or Mail Detector */
+    if (userNameOrMail) {
+        const isMail = validator.isEmail(userNameOrMail);
+        const isUserName = USER_NAMEREGEX.test(userNameOrMail);
+        
+        if (isMail) filteredData.mail = userNameOrMail;
+        else if (isUserName) filteredData.userName = userNameOrMail;
+        else return {
+            message: "Gönderdiğiniz kullanıcı adı veya mail gerekli kuralları sağlamıyor",
             code: 400
         };
     }
+    if (password) {
+        const md5Controller = validator.isMD5(password);
+        if (md5Controller) filteredData.password = password;
+        else return {
+            message: "Lütfen md5 formatında bir şifre belirtiniz",
+            code: 404
+        };
+    };
 
-    const user = await r.db("hifaKiraTakip").table("users").filter(filterParams).run();
+    
+    const user = await r.db("hifaKiraTakip").table("users").filter(filteredData).run();
     if (user && user.length) {
         const userData = user[0];
         if (userData.password === args.password) {
@@ -83,6 +65,7 @@ const signin = async (args) => {
             message: "Böyle bir kullanıcı bulunamadı."
         };
     }
+
 }
 
 export default signin;

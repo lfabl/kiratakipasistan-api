@@ -42,7 +42,7 @@ const forgetPassword = async (args) => {
 
     if (userEmail && userEmail.length) {
         return await sendEmail({ args });
-    
+
     } else {
         return {
             message: "Bu kullanıcı maili bulunamadı.",
@@ -79,8 +79,8 @@ const sendEmail = async ({ args }) => {
     })
 }
 
-const emailSender = ({ mail, subject, text }) => {
-    return new Promise((resolve, reject) => {
+const emailSender = async ({ mail, subject, text }) => {
+    return await new Promise((resolve, reject) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {

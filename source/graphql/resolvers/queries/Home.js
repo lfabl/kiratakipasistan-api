@@ -14,7 +14,7 @@ const Home = async (parent, args, context) => {
         .filter({
             "userID": requestorID
         })
-    .run();
+        .run();
     let pastEstateData = [];
     let approaching = [];
     await asyncForEach(contracts, async contract => {
@@ -27,18 +27,18 @@ const Home = async (parent, args, context) => {
             interval: parseInt(contract.contractPeriod)
         });
         const allDates = newRRule.all();
-        if(allDates.length) {
+        if (allDates.length) {
             const dateRange = Math.floor((new Date() - new Date(allDates[1])) / (1000 * 3600 * 24));
             const estate = await r
                 .db("hifaKiraTakip")
                 .table("realEstates")
                 .get(contract.realEstateID)
-            .run();
+                .run();
             let newData = JSON.parse(JSON.stringify(estate));
             newData.contract = contract;
-            if(dateRange <= 15 && dateRange >= 0) {
+            if (dateRange <= 15 && dateRange >= 0) {
                 approaching.push(newData);
-            } else if(dateRange < 0) {
+            } else if (dateRange < 0) {
                 pastEstateData.push(newData);
             }
         }
@@ -47,9 +47,10 @@ const Home = async (parent, args, context) => {
         .db("hifaKiraTakip")
         .table("realEstates")
         .filter({
-            "userID": requestorID
+            "userID": requestorID,
+            visible: true
         })
-    .run();
+        .run();
     let totalEstatesCount = [];
     let totalActiveEstates = [];
     let totalPassiveEstates = [];
@@ -59,11 +60,11 @@ const Home = async (parent, args, context) => {
             .db("hifaKiraTakip")
             .table("contracts")
             .filter({
-                "realEstateID": estate.id
+                "realEstateID": estate.id,
             })
-        .run();
-        if(control && control !== undefined && control !== null && control.length) {
-            if(control[0].status === "continuation") {
+            .run();
+        if (control && control !== undefined && control !== null && control.length) {
+            if (control[0].status === "continuation") {
                 totalActiveEstates.push(estate);
             } else {
                 totalPassiveEstates.push(estate);
@@ -74,10 +75,11 @@ const Home = async (parent, args, context) => {
         .db("hifaKiraTakip")
         .table("tenants")
         .filter({
-            "userID": requestorID
+            "userID": requestorID,
+            visible: true
         })
         .count()
-    .run();
+        .run();
     return {
         message: "Verileri çekme başarılı.",
         code: 200,

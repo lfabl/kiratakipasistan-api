@@ -12,7 +12,8 @@ const Home = async (parent, args, context) => {
         .db("hifaKiraTakip")
         .table("contracts")
         .filter({
-            "userID": requestorID
+            "userID": requestorID,
+            status: "continuation"
         })
         .run();
     let pastEstateData = [];

@@ -23,13 +23,6 @@ const newTenant = async (obj, args, context) => {
                 max: 50
             }
         },
-        tcIdentity: {
-            isEmptyString: true,
-            isLength: {
-                min: 10,
-                max: 11
-            }
-        },
         phoneNumber1: {
             isEmptyString: true,
             isLength: {
@@ -38,6 +31,17 @@ const newTenant = async (obj, args, context) => {
             },
         }
     };
+
+    if(args.tcIdentity) {
+        validationTypes.tcIdentity = {
+            isEmptyString: true,
+            isLength: {
+                min: 10,
+                max: 16
+            }
+        };
+        newTenantDatas.tcIdentity = args.tcIdentity;
+    }
 
     if (args.phoneNumber2) {
         validationTypes.phoneNumber2 = {

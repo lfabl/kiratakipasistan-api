@@ -65,7 +65,8 @@ const Home = async (parent, args, context) => {
             })
             .run();
         if (control && control !== undefined && control !== null && control.length) {
-            if (control[0].status === "continuation") {
+            const controlFilter = control.findIndex((e) => e.status === "continuation");
+            if (controlFilter !== -1) {
                 totalActiveEstates.push(estate);
             } else {
                 totalPassiveEstates.push(estate);

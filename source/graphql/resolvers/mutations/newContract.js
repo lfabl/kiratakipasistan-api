@@ -58,12 +58,23 @@ const newContract = async (obj, args, context) => {
         }
     }
     else {
+        let _rentalDate = args.rentalDate;
+        if(args.rentalDate.indexOf("-") !== -1) {
+            const splitDate = args.rentalDate.split("-");
+            let newDate = new Date();
+            newDate.setFullYear(splitDate[0], splitDate[1] - 1, splitDate[2]);
+            newDate = new Date(newDate);
+            newDate.setHours(12, 0, 0);
+            _rentalDate = new Date(newDate);
+        } else {
+            _rentalDate = new Date(args.rentalDate);
+        }
         const userID = context.userID;
         newContractDatas.userID = userID;
         newContractDatas.tenantID = args.tenantID;
         newContractDatas.realEstateID = args.realEstateID;
         newContractDatas.contractDate = new Date().toISOString();
-        newContractDatas.rentalDate = args.rentalDate;
+        newContractDatas.rentalDate = _rentalDate.toISOString();
         newContractDatas.contractPeriod = args.contractPeriod;
         newContractDatas.rentalPrice = args.rentalPrice;
         newContractDatas.paymentType = args.paymentType;

@@ -25,10 +25,15 @@ const Home = async (parent, args, context) => {
                 .get(contract.realEstateID)
                 .run();
         let newData = JSON.parse(JSON.stringify(estate));
+        newData.contract = contract;
         if(contract.contractPeriod !== "0") {
             let lastDate = new Date(moment(new Date(contract.rentalDate)).add(parseInt(contract.contractPeriod), "years"));
+            console.log(lastDate);
+            console.log(new Date());
+            console.log(lastDate - new Date());
+            console.log(moment(lastDate).diff(new Date()));
+            console.log(moment(lastDate).diff(new Date()) / (1000 * 3600 * 24));
             if(lastDate - new Date() < 1296000000 && lastDate - new Date() > 0) {
-                newData.contract = contract;
                 approaching.push(newData);
             } else if(lastDate - new Date() < 0) {
                 pastEstateData.push(newData);
